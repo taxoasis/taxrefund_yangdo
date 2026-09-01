@@ -1,0 +1,1309 @@
+<title>양도세 사전검토 신청</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #f6f7f9;
+    --surface-strong: #eef1f5;
+    --border: #dde1e8;
+    --border-strong: #c7cdd8;
+    --ink: #16232f;
+    --ink-muted: #57616f;
+    --ink-faint: #8a93a0;
+    --primary: #17395c;
+    --primary-hover: #0f2a46;
+    --primary-tint: #eaf0f6;
+    --accent: #9c7a31;
+    --accent-tint: #f7f1e3;
+    --success: #2e7d5b;
+    --success-tint: #eaf5ef;
+    --danger: #b23b33;
+    --danger-tint: #fbecea;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-card: 0 1px 2px rgba(22, 35, 47, 0.04), 0 8px 24px rgba(22, 35, 47, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, p, ul, ol, li, fieldset { margin: 0; padding: 0; }
+  fieldset { border: none; }
+  ul, ol { list-style: none; }
+  button { font: inherit; }
+  input, select { font: inherit; color: inherit; }
+  img { max-width: 100%; }
+
+  :focus-visible {
+    outline: 2.5px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  .cgt-app {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- Top bar (letterhead) ---------- */
+  .cgt-topbar {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .cgt-topbar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cgt-topbar-seal {
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-family: "Noto Serif KR", serif;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .cgt-topbar-mark {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    color: var(--primary);
+  }
+
+  /* ---------- Landing ---------- */
+  .cgt-landing {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px 64px;
+  }
+  .cgt-landing-card {
+    max-width: 560px;
+    width: 100%;
+    text-align: left;
+  }
+  .cgt-landing-card--complete { text-align: center; }
+  .cgt-eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .cgt-landing-title {
+    font-family: "Noto Serif KR", serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4.6vw, 38px);
+    line-height: 1.4;
+    color: var(--ink);
+    text-wrap: balance;
+    margin-bottom: 18px;
+  }
+  .cgt-landing-title--sm { font-size: clamp(24px, 4vw, 30px); }
+  .cgt-landing-desc {
+    font-size: 17px;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .cgt-landing-note {
+    margin-top: 28px;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+  .cgt-complete-badge {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: var(--success-tint);
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 700;
+    border: 1.5px solid var(--success);
+  }
+
+  /* ---------- Buttons ---------- */
+  .cgt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 0 26px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid transparent;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+  }
+  .cgt-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+  .cgt-btn-primary { background: var(--primary); color: #ffffff; }
+  .cgt-btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+  .cgt-btn-large { width: 100%; font-size: 18px; }
+  .cgt-btn-ghost { background: transparent; color: var(--ink-muted); border-color: var(--border-strong); }
+  .cgt-btn-ghost:hover:not(:disabled) { background: var(--surface); }
+  .cgt-btn-secondary { background: var(--bg); color: var(--primary); border-color: var(--primary); }
+  .cgt-btn-secondary:hover:not(:disabled) { background: var(--primary-tint); }
+
+  /* ---------- Form shell ---------- */
+  .cgt-formwrap {
+    flex: 1;
+    padding: 36px 16px 64px;
+    display: flex;
+    justify-content: center;
+  }
+  .cgt-formcard {
+    width: 100%;
+    max-width: 620px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 32px 28px 28px;
+  }
+  @media (max-width: 480px) {
+    .cgt-formcard { padding: 24px 18px 20px; border-radius: var(--radius-md); }
+  }
+
+  /* ---------- Progress rail ---------- */
+  .cgt-rail {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+  .cgt-rail-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    text-align: center;
+  }
+  .cgt-rail-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    border: 1.5px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--ink-faint);
+    z-index: 1;
+  }
+  .cgt-rail-step--active .cgt-rail-dot {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #fff;
+  }
+  .cgt-rail-step--done .cgt-rail-dot {
+    border-color: var(--accent);
+    background: var(--accent-tint);
+    color: var(--accent);
+  }
+  .cgt-rail-label {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    line-height: 1.4;
+    padding: 0 4px;
+  }
+  .cgt-rail-step--active .cgt-rail-label { color: var(--primary); font-weight: 700; }
+  .cgt-rail-step--done .cgt-rail-label { color: var(--ink-muted); }
+  .cgt-rail-line {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 100%;
+    height: 1.5px;
+    background: var(--border-strong);
+    z-index: 0;
+  }
+  .cgt-rail-step--done .cgt-rail-line { background: var(--accent); }
+  @media (max-width: 420px) {
+    .cgt-rail-label { display: none; }
+  }
+
+  /* ---------- Step body ---------- */
+  .cgt-step-title {
+    font-family: "Noto Serif KR", serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .cgt-step-desc {
+    font-size: 14.5px;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .cgt-field { margin-bottom: 20px; }
+  .cgt-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 480px) {
+    .cgt-field-row { grid-template-columns: 1fr; }
+  }
+  .cgt-field-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .cgt-required { color: var(--danger); margin-left: 2px; }
+  .cgt-field-hint {
+    margin-top: 7px;
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+  .cgt-field-hint--warn { color: var(--danger); }
+  .cgt-field-error {
+    margin-top: 7px;
+    font-size: 13px;
+    color: var(--danger);
+    font-weight: 600;
+  }
+  .cgt-field--error .cgt-input,
+  .cgt-field--error .cgt-select {
+    border-color: var(--danger);
+  }
+
+  .cgt-input, .cgt-select {
+    width: 100%;
+    min-height: 54px;
+    padding: 0 16px;
+    font-size: 17px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    color: var(--ink);
+    transition: border-color 120ms ease;
+  }
+  .cgt-input:focus, .cgt-select:focus { border-color: var(--primary); }
+  .cgt-input::placeholder { color: var(--ink-faint); }
+
+  .cgt-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3e%3cpath d='M1 1l6 6 6-6' stroke='%2357616f' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  .cgt-money-input {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .cgt-money-input:focus-within { border-color: var(--primary); }
+  .cgt-money-input .cgt-input {
+    border: none;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .cgt-money-input .cgt-input:focus { outline: none; }
+  .cgt-money-unit {
+    padding: 0 16px;
+    color: var(--ink-muted);
+    font-size: 15px;
+    border-left: 1.5px solid var(--border);
+    height: 54px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Dropzone ---------- */
+  .cgt-dropzone {
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    padding: 28px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 120ms ease, background-color 120ms ease;
+  }
+  .cgt-dropzone:hover { border-color: var(--primary); }
+  .cgt-dropzone--drag { border-color: var(--primary); background: var(--primary-tint); }
+  .cgt-dropzone-input {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .cgt-dropzone-text { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+  .cgt-dropzone-link { color: var(--primary); font-weight: 700; text-decoration: underline; }
+  .cgt-dropzone-hint { font-size: 12.5px; color: var(--ink-faint); }
+
+  .cgt-filelist { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .cgt-filelist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+  }
+  .cgt-filelist-name {
+    flex: 1;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cgt-filelist-size { color: var(--ink-faint); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+  .cgt-filelist-remove {
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 4px 6px;
+  }
+
+  /* ---------- Summary / consent ---------- */
+  .cgt-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cgt-summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .cgt-summary-key { color: var(--ink-muted); flex-shrink: 0; }
+  .cgt-summary-val {
+    color: var(--ink);
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cgt-notice {
+    background: var(--accent-tint);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: #6b5322;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .cgt-consent { border-top: 1px solid var(--border); padding-top: 20px; }
+  .cgt-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .cgt-checkbox input {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    accent-color: var(--primary);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .cgt-detail-toggle {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .cgt-consent-detail {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cgt-consent-detail .cgt-summary-row { font-size: 13px; }
+  .cgt-consent-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 2px; }
+
+  /* ---------- Submit status ---------- */
+  .cgt-submitstatus {
+    margin-top: 20px;
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    background: var(--primary-tint);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+  .cgt-submitstatus--error {
+    background: var(--danger-tint);
+    color: var(--danger);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .cgt-submitstatus-msg { line-height: 1.6; }
+  .cgt-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid var(--primary-tint);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: cgt-spin 800ms linear infinite;
+  }
+  @keyframes cgt-spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Nav ---------- */
+  .cgt-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .cgt-nav .cgt-btn { flex: 1; }
+
+  /* ---------- Footer ---------- */
+  .cgt-footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 24px 32px;
+    text-align: center;
+  }
+  .cgt-footer p {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    line-height: 1.6;
+  }
+  .cgt-footer-advisor {
+    font-size: 13.5px !important;
+    font-weight: 700;
+    color: var(--primary) !important;
+    margin-bottom: 8px !important;
+  }
+</style>
+
+<div id="root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.3/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useRef } = React;
+
+/* =========================================================
+   설정값
+   ========================================================= */
+
+const API_URL = "https://script.google.com/macros/s/AKfycbz5q2h4iZiQyp7XTpdRFQPuSxcP0yjSED_mU72Sp5zT-RUEU5gKpjwPvqoCK_B8oCDi/exec";
+
+const STEPS = [
+  { id: 1, label: "신청자 정보" },
+  { id: 2, label: "자료 제출" },
+  { id: 3, label: "부동산·신고정보" },
+  { id: 4, label: "동의 및 제출" },
+];
+
+const ADVISOR = {
+  name: "백기현 세무사",
+  phone: "010-5787-4192",
+  email: "taxoasis4192@gmail.com",
+};
+
+const PROPERTY_TYPES = [
+  "아파트", "단독주택", "다가구주택", "다세대/연립주택",
+  "오피스텔", "상가", "건물", "토지", "기타",
+];
+
+const ALLOWED_EXT = ["pdf", "jpg", "jpeg", "png"];
+const MAX_FILE_SIZE = 8 * 1024 * 1024;
+const TODAY = new Date().toISOString().slice(0, 10);
+
+/* =========================================================
+   유틸 함수
+   ========================================================= */
+
+function onlyDigits(v) { return (v || "").replace(/[^0-9]/g, ""); }
+
+function formatPhone(v) {
+  const d = onlyDigits(v).slice(0, 11);
+  if (d.length <= 3) return d;
+  if (d.length <= 7) return d.slice(0, 3) + "-" + d.slice(3);
+  if (d.length <= 10) return d.slice(0, 3) + "-" + d.slice(3, 6) + "-" + d.slice(6);
+  return d.slice(0, 3) + "-" + d.slice(3, 7) + "-" + d.slice(7);
+}
+
+function isValidPhone(v) {
+  const d = onlyDigits(v);
+  return d.length === 10 || d.length === 11;
+}
+
+function isValidEmail(v) {
+  if (!v) return true;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+function formatMoneyInput(v) {
+  const d = onlyDigits(v);
+  if (!d) return "";
+  return Number(d).toLocaleString("ko-KR");
+}
+
+function moneyToNumber(v) {
+  const d = onlyDigits(v);
+  return d ? Number(d) : 0;
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + "B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + "KB";
+  return (bytes / 1024 / 1024).toFixed(1) + "MB";
+}
+
+function getExt(filename) {
+  const m = /\.([^.]+)$/.exec(filename || "");
+  return m ? m[1].toLowerCase() : "";
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result || "";
+      const idx = result.indexOf(",");
+      resolve(idx >= 0 ? result.slice(idx + 1) : result);
+    };
+    reader.onerror = () => reject(new Error("파일을 읽는 중 문제가 발생했습니다."));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function postToAppsScript(payload) {
+  let res;
+  try {
+    res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+  } catch (e) {
+    throw new Error("서버에 연결할 수 없습니다. 네트워크 상태를 확인한 후 다시 시도해주세요.");
+  }
+  let data;
+  try {
+    data = await res.json();
+  } catch (e) {
+    throw new Error("서버 응답을 확인할 수 없습니다. 잠시 후 다시 시도해주세요.");
+  }
+  if (!data || data.success !== true) {
+    throw new Error((data && data.message) || "요청 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+  }
+  return data;
+}
+
+function validateApplicant(a) {
+  const e = {};
+  if (!a.name.trim()) e.name = "성명을 입력해주세요.";
+  if (!isValidPhone(a.phone)) e.phone = "휴대전화 번호를 정확히 입력해주세요.";
+  if (a.email && !isValidEmail(a.email)) e.email = "이메일 형식을 확인해주세요.";
+  return e;
+}
+
+function validateProperty(p) {
+  const e = {};
+  if (!p.propertyType) e.propertyType = "부동산 종류를 선택해주세요.";
+  if (!p.propertyAddress.trim()) e.propertyAddress = "부동산 소재지를 입력해주세요.";
+  if (!p.acquisitionDate) e.acquisitionDate = "취득일을 입력해주세요.";
+  if (!p.transferDate) e.transferDate = "양도일을 입력해주세요.";
+  if (p.acquisitionDate && p.transferDate && p.acquisitionDate > p.transferDate) {
+    e.transferDate = "양도일은 취득일과 같거나 이후여야 합니다.";
+  }
+  if (!p.acquisitionPrice) e.acquisitionPrice = "취득가액을 입력해주세요.";
+  if (!p.transferPrice) e.transferPrice = "양도가액을 입력해주세요.";
+  if (!p.reportedTax) e.reportedTax = "신고한 양도소득세를 입력해주세요.";
+  return e;
+}
+
+function validateDocuments(d) {
+  const e = {};
+  if (!d.taxReturn) e.taxReturn = "양도소득세 신고서를 첨부해주세요.";
+  if (!d.saleContract) e.saleContract = "양도계약서를 첨부해주세요.";
+  return e;
+}
+
+/* =========================================================
+   공용 컴포넌트
+   ========================================================= */
+
+function TopBar() {
+  return (
+    <div className="cgt-topbar">
+      <div className="cgt-topbar-inner">
+        <span className="cgt-topbar-seal">검</span>
+        <span className="cgt-topbar-mark">양도소득세 경정청구 사전검토 서비스</span>
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="cgt-footer">
+      <p className="cgt-footer-advisor">
+        담당 세무사 {ADVISOR.name} · {ADVISOR.phone} · {ADVISOR.email}
+      </p>
+      <p>
+        제출하신 신고서와 관련 자료는 사전검토 목적으로만 사용되며,
+        경정청구 및 환급 가능 여부에 대한 최종 판단은 담당 세무사가 자료 확인 후 수행합니다.
+      </p>
+    </footer>
+  );
+}
+
+function ProgressRail({ currentStep }) {
+  return (
+    <ol className="cgt-rail" aria-label="신청 단계">
+      {STEPS.map((s) => {
+        const state = s.id < currentStep ? "done" : s.id === currentStep ? "active" : "todo";
+        const isLast = s.id === STEPS.length;
+        return (
+          <li key={s.id} className={"cgt-rail-step cgt-rail-step--" + state}>
+            {!isLast && <span className="cgt-rail-line" aria-hidden="true"></span>}
+            <span className="cgt-rail-dot" aria-hidden="true">{state === "done" ? "✓" : s.id}</span>
+            <span className="cgt-rail-label">{s.label}</span>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function Field({ label, htmlFor, required, error, hint, children }) {
+  return (
+    <div className={"cgt-field" + (error ? " cgt-field--error" : "")}>
+      <label className="cgt-field-label" htmlFor={htmlFor}>
+        {label}{required && <span className="cgt-required" aria-hidden="true">*</span>}
+      </label>
+      {children}
+      {hint && !error && <p className="cgt-field-hint">{hint}</p>}
+      {error && <p className="cgt-field-error" role="alert">{error}</p>}
+    </div>
+  );
+}
+
+function TextInput(props) {
+  return <input className="cgt-input" {...props} />;
+}
+
+/* =========================================================
+   0단계: 첫 화면
+   ========================================================= */
+
+function LandingView({ onStart }) {
+  return (
+    <main className="cgt-landing">
+      <div className="cgt-landing-card">
+        <p className="cgt-eyebrow">부동산 양도소득세 경정청구 사전검토</p>
+        <h1 className="cgt-landing-title">양도소득세 신고, 다시 확인해볼 필요가 있습니다.</h1>
+        <p className="cgt-landing-desc">
+          기존에 신고한 부동산 양도소득세 신고내용과 관련 자료를 바탕으로
+          추가 검토가 필요한 사항이 있는지 확인합니다.
+        </p>
+        <button type="button" className="cgt-btn cgt-btn-primary cgt-btn-large" onClick={onStart}>
+          사전검토 신청하기
+        </button>
+        <p className="cgt-landing-note">
+          사전검토 결과는 경정청구 또는 환급 가능성을 확정하는 의미가 아니며,
+          제출자료 확인 후 담당 세무사가 최종적으로 검토합니다.
+        </p>
+      </div>
+    </main>
+  );
+}
+
+/* =========================================================
+   STEP 1: 신청자 정보
+   ========================================================= */
+
+function StepApplicant({ value, errors, onChange }) {
+  return (
+    <div className="cgt-step-body">
+      <h2 className="cgt-step-title">신청자 정보</h2>
+      <p className="cgt-step-desc">검토 진행 상황 안내를 위해 연락처를 정확히 입력해주세요.</p>
+
+      <Field label="성명" htmlFor="f-name" required error={errors.name}>
+        <TextInput id="f-name" type="text" value={value.name} autoComplete="name" placeholder="홍길동"
+          onChange={(e) => onChange({ ...value, name: e.target.value })} />
+      </Field>
+
+      <Field label="휴대전화" htmlFor="f-phone" required error={errors.phone}>
+        <TextInput id="f-phone" type="tel" inputMode="numeric" autoComplete="tel" placeholder="010-1234-5678"
+          value={value.phone}
+          onChange={(e) => onChange({ ...value, phone: formatPhone(e.target.value) })} />
+      </Field>
+
+      <Field label="이메일" htmlFor="f-email" error={errors.email} hint="검토 관련 안내를 받으실 수 있습니다. (선택)">
+        <TextInput id="f-email" type="email" autoComplete="email" placeholder="example@email.com"
+          value={value.email}
+          onChange={(e) => onChange({ ...value, email: e.target.value })} />
+      </Field>
+    </div>
+  );
+}
+
+/* =========================================================
+   STEP 2: 부동산 및 신고정보
+   ========================================================= */
+
+function StepProperty({ value, errors, onChange }) {
+  const set = (patch) => onChange({ ...value, ...patch });
+  return (
+    <div className="cgt-step-body">
+      <h2 className="cgt-step-title">부동산 및 신고정보</h2>
+      <p className="cgt-step-desc">기존에 신고하신 부동산 거래 내용을 입력해주세요.</p>
+
+      <Field label="부동산 종류" htmlFor="f-ptype" required error={errors.propertyType}>
+        <select id="f-ptype" className="cgt-select" value={value.propertyType}
+          onChange={(e) => set({ propertyType: e.target.value })}>
+          <option value="">선택해주세요</option>
+          {PROPERTY_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+        </select>
+      </Field>
+
+      <Field label="부동산 소재지" htmlFor="f-addr" required error={errors.propertyAddress}>
+        <TextInput id="f-addr" type="text" placeholder="예) 서울특별시 강남구 ○○로 00"
+          value={value.propertyAddress}
+          onChange={(e) => set({ propertyAddress: e.target.value })} />
+      </Field>
+
+      <div className="cgt-field-row">
+        <Field label="취득일" htmlFor="f-acqdate" required error={errors.acquisitionDate}>
+          <TextInput id="f-acqdate" type="date" max={TODAY} value={value.acquisitionDate}
+            onChange={(e) => set({ acquisitionDate: e.target.value })} />
+        </Field>
+        <Field label="양도일" htmlFor="f-trndate" required error={errors.transferDate}>
+          <TextInput id="f-trndate" type="date" max={TODAY} value={value.transferDate}
+            onChange={(e) => set({ transferDate: e.target.value })} />
+        </Field>
+      </div>
+
+      <Field label="취득가액" htmlFor="f-acqprice" required error={errors.acquisitionPrice}
+        hint="숫자만 입력하면 자동으로 쉼표가 표시됩니다.">
+        <div className="cgt-money-input">
+          <TextInput id="f-acqprice" type="text" inputMode="numeric" placeholder="0"
+            value={value.acquisitionPrice}
+            onChange={(e) => set({ acquisitionPrice: formatMoneyInput(e.target.value) })} />
+          <span className="cgt-money-unit">원</span>
+        </div>
+      </Field>
+
+      <Field label="양도가액" htmlFor="f-trnprice" required error={errors.transferPrice}>
+        <div className="cgt-money-input">
+          <TextInput id="f-trnprice" type="text" inputMode="numeric" placeholder="0"
+            value={value.transferPrice}
+            onChange={(e) => set({ transferPrice: formatMoneyInput(e.target.value) })} />
+          <span className="cgt-money-unit">원</span>
+        </div>
+      </Field>
+
+      <Field label="신고한 양도소득세" htmlFor="f-tax" required error={errors.reportedTax}>
+        <div className="cgt-money-input">
+          <TextInput id="f-tax" type="text" inputMode="numeric" placeholder="0"
+            value={value.reportedTax}
+            onChange={(e) => set({ reportedTax: formatMoneyInput(e.target.value) })} />
+          <span className="cgt-money-unit">원</span>
+        </div>
+      </Field>
+    </div>
+  );
+}
+
+/* =========================================================
+   STEP 3: 자료 제출
+   ========================================================= */
+
+function FileDropzone({ id, label, required, hint, multiple, files, onAdd, onRemove, error }) {
+  const inputRef = useRef(null);
+  const [dragOver, setDragOver] = useState(false);
+  const [localMsg, setLocalMsg] = useState("");
+
+  const process = (fileList) => {
+    const arr = Array.from(fileList || []);
+    if (!arr.length) return;
+    const accepted = [];
+    const rejected = [];
+    arr.forEach((f) => {
+      const okType = ALLOWED_EXT.indexOf(getExt(f.name)) !== -1;
+      const okSize = f.size <= MAX_FILE_SIZE;
+      if (okType && okSize) accepted.push(f);
+      else rejected.push(f.name + (!okType ? " (지원하지 않는 형식)" : " (8MB 초과)"));
+    });
+    setLocalMsg(rejected.length ? "다음 파일은 추가되지 않았습니다: " + rejected.join(", ") : "");
+    if (accepted.length) onAdd(multiple ? accepted : accepted[0]);
+  };
+
+  const currentFiles = multiple ? files : (files ? [files] : []);
+
+  return (
+    <div className={"cgt-field" + (error ? " cgt-field--error" : "")}>
+      <label className="cgt-field-label" htmlFor={id}>
+        {label}{required && <span className="cgt-required" aria-hidden="true">*</span>}
+      </label>
+      {hint && <p className="cgt-field-hint" style={{ marginTop: 0, marginBottom: 10 }}>{hint}</p>}
+      <div
+        className={"cgt-dropzone" + (dragOver ? " cgt-dropzone--drag" : "")}
+        role="button"
+        tabIndex={0}
+        onClick={() => inputRef.current && inputRef.current.click()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            inputRef.current && inputRef.current.click();
+          }
+        }}
+        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={(e) => { e.preventDefault(); setDragOver(false); process(e.dataTransfer.files); }}
+      >
+        <input
+          ref={inputRef}
+          id={id}
+          type="file"
+          className="cgt-dropzone-input"
+          accept=".pdf,.jpg,.jpeg,.png"
+          multiple={!!multiple}
+          onChange={(e) => { process(e.target.files); e.target.value = ""; }}
+        />
+        <p className="cgt-dropzone-text">
+          파일을 이곳에 끌어다 놓거나 <span className="cgt-dropzone-link">클릭하여 선택</span>하세요
+        </p>
+        <p className="cgt-dropzone-hint">
+          PDF, JPG, PNG · 파일당 최대 8MB{multiple ? " · 여러 파일 선택 가능" : ""}
+        </p>
+      </div>
+
+      {localMsg && <p className="cgt-field-hint cgt-field-hint--warn">{localMsg}</p>}
+
+      {currentFiles.length > 0 && (
+        <ul className="cgt-filelist">
+          {currentFiles.map((f, i) => (
+            <li key={f.name + "-" + i} className="cgt-filelist-item">
+              <span className="cgt-filelist-name">{f.name}</span>
+              <span className="cgt-filelist-size">{formatFileSize(f.size)}</span>
+              <button type="button" className="cgt-filelist-remove"
+                aria-label={f.name + " 삭제"}
+                onClick={(e) => { e.stopPropagation(); onRemove(multiple ? i : undefined); }}>
+                삭제
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {error && <p className="cgt-field-error" role="alert">{error}</p>}
+    </div>
+  );
+}
+
+function StepDocuments({ value, errors, onChange }) {
+  return (
+    <div className="cgt-step-body">
+      <h2 className="cgt-step-title">자료 제출</h2>
+      <p className="cgt-step-desc">검토를 위해 아래 자료를 첨부해주세요. 신고서·계약서는 필수 자료입니다.</p>
+
+      <FileDropzone id="f-doc-taxreturn" label="양도소득세 신고서" required
+        files={value.taxReturn}
+        onAdd={(f) => onChange({ ...value, taxReturn: f })}
+        onRemove={() => onChange({ ...value, taxReturn: null })}
+        error={errors.taxReturn} />
+
+      <FileDropzone id="f-doc-purchase" label="취득계약서" hint="취득 시 매매계약서가 있으면 함께 제출해주세요. (선택)"
+        files={value.purchaseContract}
+        onAdd={(f) => onChange({ ...value, purchaseContract: f })}
+        onRemove={() => onChange({ ...value, purchaseContract: null })}
+        error={errors.purchaseContract} />
+
+      <FileDropzone id="f-doc-sale" label="양도계약서" required
+        files={value.saleContract}
+        onAdd={(f) => onChange({ ...value, saleContract: f })}
+        onRemove={() => onChange({ ...value, saleContract: null })}
+        error={errors.saleContract} />
+
+      <FileDropzone id="f-doc-other" label="필요경비 증빙 및 기타자료" multiple
+        files={value.other}
+        onAdd={(fs) => onChange({ ...value, other: value.other.concat(fs) })}
+        onRemove={(i) => onChange({ ...value, other: value.other.filter((_, idx) => idx !== i) })}
+        error={null} />
+    </div>
+  );
+}
+
+/* =========================================================
+   STEP 4: 개인정보 동의 및 제출
+   ========================================================= */
+
+function SummaryRow({ label, val }) {
+  return (
+    <div className="cgt-summary-row">
+      <span className="cgt-summary-key">{label}</span>
+      <span className="cgt-summary-val">{val}</span>
+    </div>
+  );
+}
+
+function StepConsent({ applicant, property, documents, consent, onConsentChange }) {
+  const [detailOpen, setDetailOpen] = useState(false);
+  const otherCount = documents.other.length;
+
+  return (
+    <div className="cgt-step-body">
+      <h2 className="cgt-step-title">신청 내용 확인 및 동의</h2>
+      <p className="cgt-step-desc">아래 내용을 확인하신 후 동의하고 제출해주세요.</p>
+
+      <div className="cgt-summary">
+        <SummaryRow label="성명" val={applicant.name} />
+        <SummaryRow label="휴대전화" val={applicant.phone} />
+        {applicant.email && <SummaryRow label="이메일" val={applicant.email} />}
+        <SummaryRow label="부동산 종류" val={property.propertyType} />
+        <SummaryRow label="부동산 소재지" val={property.propertyAddress} />
+        <SummaryRow label="취득일 / 양도일" val={property.acquisitionDate + " / " + property.transferDate} />
+        <SummaryRow label="취득가액" val={property.acquisitionPrice + "원"} />
+        <SummaryRow label="양도가액" val={property.transferPrice + "원"} />
+        <SummaryRow label="신고한 양도소득세" val={property.reportedTax + "원"} />
+        <SummaryRow label="첨부자료"
+          val={"신고서, 취득계약서, 양도계약서" + (otherCount ? " 외 기타자료 " + otherCount + "건" : "")} />
+      </div>
+
+      <div className="cgt-notice">
+        사전검토 결과는 경정청구 또는 환급 가능성을 확정하는 의미가 아니며,
+        제출자료 확인 후 담당 세무사가 최종적으로 검토합니다.
+      </div>
+
+      <div className="cgt-consent">
+        <label className="cgt-checkbox">
+          <input type="checkbox" checked={consent}
+            onChange={(e) => onConsentChange(e.target.checked)} />
+          <span>개인정보 수집 및 이용에 동의합니다.<span className="cgt-required" aria-hidden="true">*</span></span>
+        </label>
+
+        <button type="button" className="cgt-detail-toggle" aria-expanded={detailOpen}
+          onClick={() => setDetailOpen((v) => !v)}>
+          {detailOpen ? "자세히 보기 접기" : "수집 항목 및 이용 목적 자세히 보기"}
+        </button>
+
+        {detailOpen && (
+          <div className="cgt-consent-detail">
+            <SummaryRow label="수집 항목" val="성명, 휴대전화, 이메일, 부동산 거래정보, 제출 서류" />
+            <SummaryRow label="수집 목적" val="양도소득세 경정청구 사전검토 서비스 제공" />
+            <SummaryRow label="보유 기간" val="검토 완료 후 관련 법령에 따른 보관기간까지" />
+            <p className="cgt-consent-note">동의를 거부하실 수 있으며, 이 경우 사전검토 신청이 제한됩니다.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SubmitStatus({ submitting, progressMessage, error, onRetry }) {
+  if (!submitting && !error) return null;
+  return (
+    <div className={"cgt-submitstatus" + (error ? " cgt-submitstatus--error" : "")} role="status" aria-live="polite">
+      {submitting && (
+        <React.Fragment>
+          <span className="cgt-spinner" aria-hidden="true"></span>
+          <span>{progressMessage}</span>
+        </React.Fragment>
+      )}
+      {error && !submitting && (
+        <React.Fragment>
+          <p className="cgt-submitstatus-msg">{error}</p>
+          <button type="button" className="cgt-btn cgt-btn-secondary" onClick={onRetry}>다시 시도</button>
+        </React.Fragment>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================
+   완료 화면
+   ========================================================= */
+
+function CompleteView() {
+  return (
+    <main className="cgt-landing">
+      <div className="cgt-landing-card cgt-landing-card--complete">
+        <div className="cgt-complete-badge" aria-hidden="true">✓</div>
+        <h1 className="cgt-landing-title cgt-landing-title--sm">사전검토 신청이 완료되었습니다.</h1>
+        <p className="cgt-landing-desc">
+          제출하신 신고서와 관련 자료를 확인한 후 담당 세무사가 검토합니다.
+        </p>
+      </div>
+    </main>
+  );
+}
+
+/* =========================================================
+   신청 폼 셸 (진행 표시 + 이전/다음 버튼)
+   ========================================================= */
+
+function FormShell({ formStep, children, onPrev, onNext, onSubmit, submitting, isLastStep, submitDisabled }) {
+  return (
+    <main className="cgt-formwrap">
+      <div className="cgt-formcard">
+        <ProgressRail currentStep={formStep} />
+        {children}
+        <div className="cgt-nav">
+          <button type="button" className="cgt-btn cgt-btn-ghost"
+            onClick={onPrev} disabled={formStep === 1 || submitting}>
+            이전
+          </button>
+          {isLastStep ? (
+            <button type="button" className="cgt-btn cgt-btn-primary"
+              onClick={onSubmit} disabled={submitDisabled}>
+              {submitting ? "제출 중..." : "제출하기"}
+            </button>
+          ) : (
+            <button type="button" className="cgt-btn cgt-btn-primary"
+              onClick={onNext} disabled={submitting}>
+              다음
+            </button>
+          )}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/* =========================================================
+   App: 전체 상태 관리
+   개인정보는 브라우저 메모리(React state)에만 일시 보관하며
+   localStorage 등에 저장하지 않으므로 새로고침 시 모두 초기화됩니다.
+   ========================================================= */
+
+function App() {
+  const [phase, setPhase] = useState("landing"); // landing | form | complete
+  const [formStep, setFormStep] = useState(1);
+
+  const [applicant, setApplicant] = useState({ name: "", phone: "", email: "" });
+  const [property, setProperty] = useState({
+    propertyType: "", propertyAddress: "", acquisitionDate: "", transferDate: "",
+    acquisitionPrice: "", transferPrice: "", reportedTax: "",
+  });
+  const [documents, setDocuments] = useState({
+    taxReturn: null, purchaseContract: null, saleContract: null, other: [],
+  });
+  const [consent, setConsent] = useState(false);
+  const [stepErrors, setStepErrors] = useState({});
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [progressMessage, setProgressMessage] = useState("");
+
+  const caseNoRef = useRef(null);
+  const uploadedKeysRef = useRef(new Set());
+
+  const goNext = () => {
+    let errs = {};
+    if (formStep === 1) errs = validateApplicant(applicant);
+    if (formStep === 2) errs = validateDocuments(documents);
+    if (formStep === 3) errs = validateProperty(property);
+    setStepErrors(errs);
+    if (Object.keys(errs).length === 0) {
+      setFormStep((s) => Math.min(4, s + 1));
+      window.scrollTo({ top: 0 });
+    }
+  };
+
+  const goPrev = () => {
+    setStepErrors({});
+    setFormStep((s) => Math.max(1, s - 1));
+    window.scrollTo({ top: 0 });
+  };
+
+  const buildQueue = () => {
+    const q = [];
+    if (documents.taxReturn) {
+      q.push({ key: "taxReturn", type: "taxReturn", msg: "신고서 업로드 중...", file: documents.taxReturn });
+    }
+    if (documents.purchaseContract) {
+      q.push({ key: "purchaseContract", type: "purchaseContract", msg: "취득계약서 업로드 중...", file: documents.purchaseContract });
+    }
+    if (documents.saleContract) {
+      q.push({ key: "saleContract", type: "saleContract", msg: "양도계약서 업로드 중...", file: documents.saleContract });
+    }
+    documents.other.forEach((f, i) => {
+      q.push({
+        key: "other-" + i, type: "other",
+        msg: "기타자료 업로드 중 (" + (i + 1) + "/" + documents.other.length + ")...",
+        file: f,
+      });
+    });
+    return q;
+  };
+
+  const handleSubmit = async () => {
+    if (!consent || submitting) return;
+    setSubmitError(null);
+    setSubmitting(true);
+    try {
+      if (!caseNoRef.current) {
+        setProgressMessage("신청정보 저장 중...");
+        const data = await postToAppsScript({
+          action: "createCase",
+          name: applicant.name,
+          phone: applicant.phone,
+          email: applicant.email,
+          propertyType: property.propertyType,
+          propertyAddress: property.propertyAddress,
+          acquisitionDate: property.acquisitionDate,
+          transferDate: property.transferDate,
+          acquisitionPrice: moneyToNumber(property.acquisitionPrice),
+          transferPrice: moneyToNumber(property.transferPrice),
+          reportedTax: moneyToNumber(property.reportedTax),
+          privacyConsent: true,
+        });
+        caseNoRef.current = data.no;
+      }
+
+      const queue = buildQueue();
+      for (let i = 0; i < queue.length; i++) {
+        const item = queue[i];
+        if (uploadedKeysRef.current.has(item.key)) continue;
+        setProgressMessage(item.msg);
+        const base64 = await fileToBase64(item.file);
+        await postToAppsScript({
+          action: "uploadFile",
+          no: caseNoRef.current,
+          name: applicant.name,
+          documentType: item.type,
+          fileName: item.file.name,
+          mimeType: item.file.type || "application/octet-stream",
+          base64: base64,
+        });
+        uploadedKeysRef.current.add(item.key);
+      }
+
+      setProgressMessage("접수 완료");
+      setPhase("complete");
+    } catch (err) {
+      setSubmitError(err.message || "제출 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  let stepBody = null;
+  if (formStep === 1) {
+    stepBody = <StepApplicant value={applicant} errors={stepErrors} onChange={setApplicant} />;
+  } else if (formStep === 2) {
+    stepBody = <StepDocuments value={documents} errors={stepErrors} onChange={setDocuments} />;
+  } else if (formStep === 3) {
+    stepBody = <StepProperty value={property} errors={stepErrors} onChange={setProperty} />;
+  } else if (formStep === 4) {
+    stepBody = (
+      <React.Fragment>
+        <StepConsent applicant={applicant} property={property} documents={documents}
+          consent={consent} onConsentChange={setConsent} />
+        <SubmitStatus submitting={submitting} progressMessage={progressMessage}
+          error={submitError} onRetry={handleSubmit} />
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <div className="cgt-app">
+      <TopBar />
+      {phase === "landing" && <LandingView onStart={() => setPhase("form")} />}
+      {phase === "form" && (
+        <FormShell
+          formStep={formStep}
+          onPrev={goPrev}
+          onNext={goNext}
+          onSubmit={handleSubmit}
+          submitting={submitting}
+          isLastStep={formStep === 4}
+          submitDisabled={submitting || !consent}
+        >
+          {stepBody}
+        </FormShell>
+      )}
+      {phase === "complete" && <CompleteView />}
+      <Footer />
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
